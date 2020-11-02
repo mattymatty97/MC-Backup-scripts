@@ -32,6 +32,7 @@ myPID="$$"
 
 #removing tmp files on close
 function cleanup () {
+    kill $(jobs -p)
     stty $oldtty
     if [[ -f /tmp/$myPID-input1.fifo ]]; then
         rm /tmp/$myPID-input1.fifo
