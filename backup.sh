@@ -54,10 +54,11 @@ function _doSave () {
 
 function _doRestore () {
     #save actual state in a separate branch
-    git branch "rollback_$(date +"$dateFormat")" 
+    _doSave 3>/dev/null
+    git branch "rollback_$(date +"$dateFormat")"
    
     #reset to the requested commit
-    git reset --hard ${1:-"HEAD~1"}
+    git reset --hard ${1=-"HEAD~1"}
     
     echo "Restore completed" >&3
     echo "current commit: $(git rev-parse --short HEAD)" >&3
@@ -96,6 +97,9 @@ case "$1" in
     else
         _doList "--since=1.day"
     fi
+    ;;
+    setup)
+        echo "git repo ready" >&3
     ;;
     *)
         _doHelp >&3

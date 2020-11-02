@@ -10,7 +10,7 @@ restoreCMD="./backup.sh restore"
 
 listCMD="./backup.sh list"
 
-setupCMD=":"
+setupCMD="./backup.sh setup"
 
 whitelistFile="backup_whitelist.txt"
 
@@ -165,7 +165,7 @@ function parse_command () {
 
 #utility to mirror the server input system + pasre backup command
 function read_terminal (){
-    local pat='backup (.*)'
+    local pat='/?backup (.*)'
     local line=""
     while read -e line; do
         if [[ "$line" =~ $pat ]]; then
@@ -264,7 +264,7 @@ function run_Server () {
     if [[ -f /tmp/$myPID-restore.tmp ]]; then
         rm /tmp/$myPID-restore.tmp
     else
-        kill -1 $myPID
+        kill -1 $myPID >/dev/null 2>&1
     fi
 }
 
