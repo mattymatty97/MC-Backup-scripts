@@ -39,6 +39,14 @@ function cleanup () {
     if [[ -f  /tmp/$myPID-game.tmp ]]; then
         rm /tmp/$myPID-game.tmp
     fi
+   
+    if [[ -f  /tmp/$myPID-output.fifo ]]; then
+        rm /tmp/$myPID-output.fifo
+    fi
+    
+    if [[ -f  /tmp/$myPID-restore.tmp ]]; then
+        rm /tmp/$myPID-restore.tmp
+    fi
 }
 
 #creating the enviroment
